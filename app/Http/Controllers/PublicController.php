@@ -2,32 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Postagem;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    public function __construct(){
         
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('public');
+    public function index(){
+        
+        $array['postagens'] = Postagem::where('ativa', '=', 'S')->get();
+        
+        return view('public', $array);
     }
 
-    public function postagem()
-    {
-        return view('public_post');
+    public function postagem(Request $request){
+        $postagem = Postagem::find($request->id);
+        return view('public_post', compact('postagem'));
     }
 }

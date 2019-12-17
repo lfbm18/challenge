@@ -9,6 +9,8 @@ class Postagem extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['titulo', 'descricao', 'imagem', 'ativa'];
+
     protected $table = 'postagem';
     protected $primaryKey = "id";
 }
